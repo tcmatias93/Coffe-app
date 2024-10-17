@@ -10,6 +10,7 @@ import { Bean } from "@/src/store/typeStore";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import CoffeeCard from "./CoffeeCard";
 import { SPACING } from "@/src/theme/theme";
+import { useRouter } from "expo-router";
 
 interface BeansListProps {
   beanList: Bean[];
@@ -21,6 +22,7 @@ const BeansList: React.FC<BeansListProps> = ({
   coffeCardAddToCart,
 }) => {
   const tabBarHeight = useBottomTabBarHeight();
+  const router = useRouter();
   return (
     <FlatList
       horizontal
@@ -32,7 +34,14 @@ const BeansList: React.FC<BeansListProps> = ({
       ]}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => console.log(item.id)}>
+        <TouchableOpacity
+          onPress={() =>
+            router.push({
+              pathname: `/home/details/[id]`,
+              params: { index: item.index, id: item.id, type: item.type },
+            })
+          }
+        >
           <CoffeeCard
             imagelink_square={item.imagelink_square}
             average_rating={item.average_rating}

@@ -12,11 +12,8 @@ const TabsLayout = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBarStyle,
-        tabBarButton: ["home/details/[id]"].includes(route.name)
-          ? () => {
-              return null;
-            }
-          : undefined,
+        tabBarButton: route.name.includes("details") ? () => null : undefined,
+        tabBarVisible: !route.name.includes("details"),
       })}
     >
       <Tabs.Screen
