@@ -10,6 +10,7 @@ import React from "react";
 import { Coffee } from "@/src/store/typeStore";
 import { COLORS, FONTFAMILY, FONTSIZE, SPACING } from "@/src/theme/theme";
 import CoffeeCard from "./CoffeeCard";
+import { useRouter } from "expo-router";
 
 interface CoffeeListProps {
   sortedCoffee: Coffee[];
@@ -22,6 +23,8 @@ const CoffeeList: React.FC<CoffeeListProps> = ({
   coffeCardAddToCart,
   listRef,
 }) => {
+  const router = useRouter();
+
   return (
     <FlatList
       ref={listRef}
@@ -36,7 +39,15 @@ const CoffeeList: React.FC<CoffeeListProps> = ({
       contentContainerStyle={styles.flatListContainer}
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (
-        <TouchableOpacity key={index} onPress={() => console.log(item.id)}>
+        <TouchableOpacity
+          key={index}
+          onPress={() =>
+            router.push({
+              pathname: `/home/details/[id]`,
+              params: { index: item.index, id: item.id, type: item.type },
+            })
+          }
+        >
           <CoffeeCard
             imagelink_square={item.imagelink_square}
             average_rating={item.average_rating}

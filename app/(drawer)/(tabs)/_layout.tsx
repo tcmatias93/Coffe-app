@@ -1,11 +1,10 @@
-import { StyleSheet } from 'react-native'
-import React from 'react'
-import { Tabs } from 'expo-router'
-import { COLORS } from '@/src/theme/theme'
-import CustomIcon from '@/src/components/CustomIcon'
+import { StyleSheet } from "react-native";
+import React from "react";
+import { Tabs } from "expo-router";
+import { COLORS } from "@/src/theme/theme";
+import CustomIcon from "@/src/components/CustomIcon";
 
 const TabsLayout = () => {
-
   return (
     <Tabs
       screenOptions={({ route }) => ({
@@ -13,69 +12,97 @@ const TabsLayout = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBarStyle,
-
+        tabBarButton: ["home/details/[id]"].includes(route.name)
+          ? () => {
+              return null;
+            }
+          : undefined,
       })}
     >
       <Tabs.Screen
-        name='home/index'
+        name="home/index"
         options={{
-          tabBarLabel: 'Home',
-          title: 'Home',
+          tabBarLabel: "Home",
+          title: "Home",
           tabBarIcon: ({ focused, color, size }) => (
-            <CustomIcon name='home' size={25} color={focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex} />
-          )
+            <CustomIcon
+              name="home"
+              size={25}
+              color={
+                focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex
+              }
+            />
+          ),
         }}
       />
       <Tabs.Screen
-        name='cart/index'
+        name="cart/index"
         options={{
-          tabBarLabel: 'Cart',
-          title: 'Cart',
+          tabBarLabel: "Cart",
+          title: "Cart",
           tabBarIcon: ({ focused, color, size }) => (
-            <CustomIcon name='cart' size={25} color={focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex} />
-          )
+            <CustomIcon
+              name="cart"
+              size={25}
+              color={
+                focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex
+              }
+            />
+          ),
         }}
       />
       <Tabs.Screen
-        name='favorite/index'
+        name="favorite/index"
         options={{
-          tabBarLabel: 'Favorite',
-          title: 'Favorites',
+          tabBarLabel: "Favorite",
+          title: "Favorites",
           tabBarIcon: ({ focused, color, size }) => (
-            <CustomIcon name='like' size={25} color={focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex} />
-          )
+            <CustomIcon
+              name="like"
+              size={25}
+              color={
+                focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex
+              }
+            />
+          ),
         }}
       />
       <Tabs.Screen
-        name='history/index'
+        name="history/index"
         options={{
-          tabBarLabel: 'History',
-          title: 'Order History',
+          tabBarLabel: "History",
+          title: "Order History",
           tabBarIcon: ({ focused, color, size }) => (
-            <CustomIcon name='bell' size={25} color={focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex} />
-          )
+            <CustomIcon
+              name="bell"
+              size={25}
+              color={
+                focused ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex
+              }
+            />
+          ),
         }}
       />
     </Tabs>
-  )
-}
+  );
+};
 
-export default TabsLayout
+export default TabsLayout;
 
 const styles = StyleSheet.create({
   tabBarStyle: {
     height: 80,
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: COLORS.primaryBlackRGBA,
     borderTopWidth: 0,
     elevation: 0,
-    borderTopColor: 'transparent'
+    borderTopColor: "transparent",
   },
   BlurViewStyles: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0
-  }
-})
+    right: 0,
+  },
+});
