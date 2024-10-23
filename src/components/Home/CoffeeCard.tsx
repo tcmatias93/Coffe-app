@@ -31,7 +31,7 @@ interface CoffeeCardProps {
   special_ingredient: string;
   average_rating: number;
   price: any;
-  buttonPressHandler: any;
+  coffeCardAddToCart: any;
 }
 
 const CoffeeCard: React.FC<CoffeeCardProps> = ({
@@ -40,7 +40,7 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
   name,
   special_ingredient,
   price,
-  buttonPressHandler,
+  coffeCardAddToCart,
   id,
   index,
   type,
@@ -75,7 +75,7 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
         </Text>
         <TouchableOpacity
           onPress={() => {
-            buttonPressHandler({
+            coffeCardAddToCart({
               id,
               index,
               type,

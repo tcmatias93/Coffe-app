@@ -16,11 +16,12 @@ import SearchInput from "@/src/components/Home/SearchInput";
 import CategoryCoffee from "@/src/components/Home/CategoryCoffee";
 import CoffeeList from "@/src/components/Home/CoffeeList";
 import BeansList from "@/src/components/Home/BeansList";
-import { Coffee } from "@/src/store/typeStore";
+import { Bean, Coffee } from "@/src/store/typeStore";
 
 const indexHome = () => {
   const coffeList = useStore((state) => state.CoffeeList);
   const beanList = useStore((state) => state.BeanList);
+  const addToCart = useStore((state) => state.addToCart);
   const [categories, setCategories] = useState(
     getCategoriesFromData(coffeList)
   );
@@ -35,7 +36,27 @@ const indexHome = () => {
 
   const listRef = useRef<FlatList<any>>(null);
 
-  const coffeCardAddToCart = () => {};
+  const coffeCardAddToCart = ({
+    id,
+    index,
+    name,
+    roasted,
+    imagelink_square,
+    special_ingredient,
+    type,
+    prices,
+  }: Coffee | Bean) => {
+    addToCart(
+      id,
+      index,
+      name,
+      roasted,
+      imagelink_square,
+      special_ingredient,
+      type,
+      prices
+    );
+  };
 
   const searchCoffee = (search: string) => {
     if (search != "") {

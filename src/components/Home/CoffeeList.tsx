@@ -58,7 +58,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({
             index={item.index}
             type={item.type}
             roasted={item.roasted}
-            buttonPressHandler={coffeCardAddToCart}
+            coffeCardAddToCart={coffeCardAddToCart}
           />
         </TouchableOpacity>
       )}

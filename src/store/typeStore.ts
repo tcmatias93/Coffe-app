@@ -42,7 +42,11 @@ export interface StoreState {
   CoffeeList: Coffee[];
   BeanList: Bean[];
   CartPrice: number;
-  FavoritesList: Coffee[]; // O el tipo que corresponda
-  CartList: Coffee[]; // O el tipo que corresponda
-  OrderHistoryList: Coffee[]; // O el tipo que corresponda
+  FavoritesList: Coffee[];
+  CartList: Coffee[];
+  OrderHistoryList: Coffee[];
+  addToCart: (cartItem: Coffee | Bean) => void;
+  calculateCartPrice: () => void;
+  addToFavoriteList: (type: string, id: string) => void;
+  deleteFromFavoriteList: (type: string, id: string) => void;
 }
