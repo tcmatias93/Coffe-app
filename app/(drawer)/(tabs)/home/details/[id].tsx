@@ -7,6 +7,7 @@ import ImageBackgroundInfo from "@/src/components/Home/Details/ImageBackgroundIn
 import Description from "@/src/components/Home/Details/Description";
 import Size from "@/src/components/Home/Details/Size";
 import PaymentFooter from "@/src/components/Home/Details/PaymentFooter";
+import { Bean, Coffee } from "@/src/store/typeStore";
 
 const Details = () => {
   const { id, index, type } = useLocalSearchParams();
@@ -19,13 +20,43 @@ const Details = () => {
     type == "Coffee" ? state.CoffeeList : state.BeanList
   )[numericIndex];
   const [price, setPrice] = useState(itemOfIndex.prices[0]);
+  const addToFavoriteList = useStore((state) => state.addToFavoriteList);
+  const deleteFromFavoriteList = useStore(
+    (state) => state.deleteFromFavoriteList
+  );
+  const addToCart = useStore((state) => state.addToCart);
+  const calculateCartPrice = useStore((state) => state.calculateCartPrice);
 
   const backHandler = () => {
     navigation.goBack();
   };
 
   const toggleFavourite = (favourite: any, type: any, id: any) => {
-    console.log(favourite, type, id);
+    favourite ? deleteFromFavoriteList(type, id) : addToFavoriteList(type, id);
+  };
+
+  const addToCarthandler = ({
+    id,
+    index,
+    name,
+    roasted,
+    imagelink_square,
+    special_ingredient,
+    type,
+    price,
+  }: any) => {
+    addToCart({
+      id,
+      index,
+      name,
+      roasted,
+      imagelink_square,
+      special_ingredient,
+      type,
+      prices: [{ ...price, quantity: 1 }],
+    });
+    //calculateCartPrice();
+    navigation.navigate("cart/index");
   };
 
   return (
@@ -58,7 +89,22 @@ const Details = () => {
             setPrice={setPrice}
             type={itemOfIndex.type}
           />
-          <PaymentFooter price={price} buttonTitle="Add to Cart" />
+          <PaymentFooter
+            price={price}
+            buttonTitle="Add to Cart"
+            buttonPresHandler={() =>
+              addToCarthandler({
+                id: itemOfIndex.id,
+                index: itemOfIndex.index,
+                name: itemOfIndex.name,
+                roasted: itemOfIndex.roasted,
+                imagelink_square: itemOfIndex.imagelink_square,
+                special_ingredient: itemOfIndex.special_ingredient,
+                type: itemOfIndex.type,
+                price: price,
+              })
+            }
+          />
         </View>
       </ScrollView>
     </View>

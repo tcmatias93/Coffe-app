@@ -17,6 +17,7 @@ import CategoryCoffee from "@/src/components/Home/CategoryCoffee";
 import CoffeeList from "@/src/components/Home/CoffeeList";
 import BeansList from "@/src/components/Home/BeansList";
 import { Bean, Coffee } from "@/src/store/typeStore";
+import Toast from "react-native-toast-message";
 
 const indexHome = () => {
   const coffeList = useStore((state) => state.CoffeeList);
@@ -33,6 +34,7 @@ const indexHome = () => {
   const [sortedCoffee, setSortedCoffee] = useState(
     getCoffeeList(categoryIndex.category, coffeList)
   );
+  const calculateCartPrice = useStore((state) => state.calculateCartPrice);
 
   const listRef = useRef<FlatList<any>>(null);
 
@@ -45,8 +47,8 @@ const indexHome = () => {
     special_ingredient,
     type,
     prices,
-  }: Coffee | Bean) => {
-    addToCart(
+  }: any) => {
+    addToCart({
       id,
       index,
       name,
@@ -54,8 +56,16 @@ const indexHome = () => {
       imagelink_square,
       special_ingredient,
       type,
-      prices
-    );
+      prices,
+    });
+    //calculateCartPrice();
+    Toast.show({
+      text1: "is Added to Cart",
+      autoHide: true,
+      visibilityTime: 1000,
+      position: "top",
+      topOffset: 70,
+    });
   };
 
   const searchCoffee = (search: string) => {
