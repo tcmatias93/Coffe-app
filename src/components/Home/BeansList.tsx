@@ -52,7 +52,7 @@ const BeansList: React.FC<BeansListProps> = ({
             index={item.index}
             type={item.type}
             roasted={item.roasted}
-            buttonPressHandler={coffeCardAddToCart}
+            coffeCardAddToCart={coffeCardAddToCart}
           />
         </TouchableOpacity>
       )}
